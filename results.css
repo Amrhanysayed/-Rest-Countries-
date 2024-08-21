@@ -3,6 +3,23 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image-container img {
+  width: inherit;
+}
+@media (max-width: 768px) {
+  .main-flex-container {
+    flex-direction: column;
+  }
+  .image-container img {
+    width: 400px;
+    margin-bottom: 40px;
+  }
+}
 .back-container {
   position: relative;
   margin-bottom: 80px;
@@ -38,6 +55,12 @@
   justify-content: start;
   align-items: start;
   margin-left: 100px;
+}
+@media (max-width: 768px) {
+  .details-container {
+    margin: 0;
+    align-items: center;
+  }
 }
 .country-details--grid {
   display: grid;

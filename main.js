@@ -30,16 +30,8 @@ dark_btn.addEventListener("click", function () {
   }
 });
 
-backButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  main.classList.toggle("hidden");
-  searchResult.classList.toggle("hidden");
-});
-
 cardsContainer.addEventListener("click", (e) => {
-  e.preventDefault();
   const clicked = e.target;
-  console.log(clicked);
   if (!clicked.closest(".card")) return;
   main.classList.toggle("hidden");
   searchResult.classList.toggle("hidden");

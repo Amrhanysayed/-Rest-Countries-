@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script defer src="main.js"></script>
+    <script defer type="module" src="./controller.js"></script>
+    <!-- <script defer type="module" src="./view.js"></script> -->
 
     <title>Rest Countries</title>
     <link rel="stylesheet" href="style.css" />
@@ -20,7 +22,7 @@
         <button class="Dark"><i class="bx bx-moon"></i>Dark Mode</button>
       </nav>
     </section>
-    <main class="hidden">
+    <main class="">
       <div class="container">
         <div class="search-filter">
           <div class="search-container">
@@ -41,56 +43,28 @@
       <section>
         <div class="container">
           <div class="crads-box">
-            <div class="card">
-              <img
-                src="https://cdn.britannica.com/82/65482-050-E43AB312/Flag-detail-Germany-crest.jpg"
-                alt=""
-              />
-              <div class="card-text">
-                <div class="card-title">
-                  <h3>Afghanistan</h3>
+            <!-- <a href="#Germany">
+              <div class="card">
+                <img
+                  src="https://cdn.britannica.com/82/65482-050-E43AB312/Flag-detail-Germany-crest.jpg"
+                  alt=""
+                />
+                <div class="card-text">
+                  <div class="card-title">
+                    <h3>Afghanistan</h3>
+                  </div>
+                  <p><span>Population:</span> 27,000,000</p>
+                  <p><span>Region:</span> Asia</p>
+                  <p><span>Capital:</span> Kabul</p>
                 </div>
-                <p><span>Population:</span> 27,000,000</p>
-                <p><span>Region:</span> Asia</p>
-                <p><span>Capital:</span> Kabul</p>
               </div>
-            </div>
-
-            <div class="card">
-              <img
-                src="https://cdn.britannica.com/82/65482-050-E43AB312/Flag-detail-Germany-crest.jpg"
-                alt=""
-              />
-              <div class="card-text">
-                <div class="card-title">
-                  <h3>Afghanistan</h3>
-                </div>
-                <p><span>Population:</span> 27,000,000</p>
-                <p><span>Region:</span> Asia</p>
-                <p><span>Capital:</span> Kabul</p>
-              </div>
-            </div>
-
-            <div class="card">
-              <img
-                src="https://cdn.britannica.com/82/65482-050-E43AB312/Flag-detail-Germany-crest.jpg"
-                alt=""
-              />
-              <div class="card-text">
-                <div class="card-title">
-                  <h3>Afghanistan</h3>
-                </div>
-                <p><span>Population:</span> 27,000,000</p>
-                <p><span>Region:</span> Asia</p>
-                <p><span>Capital:</span> Kabul</p>
-              </div>
-            </div>
+            </a> -->
           </div>
         </div>
       </section>
     </main>
-    <section class="search-result container">
-      <div class="back-container">
+    <section class="search-result container hidden">
+      <!-- <div class="back-container">
         <button>Back</button>
         <i class="bx bx-left-arrow-alt"></i>
       </div>
@@ -120,7 +94,7 @@
             <div class="boxing">Netherlands</div>
           </div>
         </div>
-      </div>
+      </div> -->
     </section>
   </body>
 </html>
