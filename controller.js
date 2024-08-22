@@ -8,7 +8,7 @@ async function showAll() {
 
 async function showCountry() {
   const hash = document.location.hash.slice(1);
-  if (!hash) return;
+  if (!hash) return showAll();
 
   const country = await Model.getCountry(hash);
   View.renderResult(country);
@@ -16,7 +16,6 @@ async function showCountry() {
 }
 
 function init() {
-  showAll();
   View.handlers(showCountry);
 }
 

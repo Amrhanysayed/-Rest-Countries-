@@ -2,7 +2,8 @@ class View {
   parentElement = document.querySelector(".crads-box");
 
   renderAllCountries(countries) {
-    console.log(countries);
+    document.querySelector(".search-result").classList.add("hidden");
+    document.querySelector("main").classList.remove("hidden");
     this.parentElement.innerHTML = "";
     Array.from(countries).forEach((country) => {
       this.parentElement.innerHTML += this.generateAllMarkup(country);
