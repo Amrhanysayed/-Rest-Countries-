@@ -2,6 +2,7 @@ class View {
   parentElement = document.querySelector(".crads-box");
 
   renderAllCountries(countries) {
+    console.log(countries);
     this.parentElement.innerHTML = "";
     Array.from(countries).forEach((country) => {
       this.parentElement.innerHTML += this.generateAllMarkup(country);
@@ -95,7 +96,8 @@ class View {
     if (!borders) return `<div class="boxing">NONE</div>`;
     let html = ``;
     borders.forEach(
-      (border) => (html += ` <div class="boxing">${border}</div>`)
+      (border) =>
+        (html += ` <a href="#${border}"><div class="boxing">${border}</div></a>`)
     );
     return html;
   }
