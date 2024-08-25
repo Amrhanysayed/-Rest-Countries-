@@ -1,6 +1,28 @@
 class View {
   parentElement = document.querySelector(".crads-box");
 
+  renderSearchedValue(callback) {
+    const searchCountry = document.querySelector(".search-form");
+    document.querySelector(".search-input").addEventListener("keyup", (e) => {
+      e.preventDefault();
+      const countryRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
+      const val = document.querySelector(".search-input").value;
+      console.log(val);
+      if (countryRegex.test(val)) callback("", val);
+      else if (!val) callback();
+      else {
+        document.querySelector(".search-input").value = "";
+        document.querySelector(".search-input").placeholder =
+          "Invalid Country Name";
+      }
+    });
+  }
+  renderFilteredValue(callback) {
+    const selectedFilter = document.getElementById("filter");
+    selectedFilter.addEventListener("change", (e) => {
+      callback(e.target.value);
+    });
+  }
   renderAllCountries(countries) {
     document.querySelector(".search-result").classList.add("hidden");
     document.querySelector("main").classList.remove("hidden");
@@ -40,7 +62,7 @@ class View {
                 </div>
                 <p><span>Population:</span> ${country.population}</p>
                 <p><span>Region:</span> ${country.region}</p>
-                <p><span>Capital:</span> capital</p>
+                <p><span>Capital:</span> ${country.capital}</p>
               </div>
             </div>
           </a>
@@ -73,7 +95,9 @@ class View {
             )}</p>
             <p><span class="key">Population</span>: ${country.population}</p>
             <p><span class="key">Region</span>: ${country.region}</p>
-            <p><span class="key">Sub Region</span>: ${country.subregion}</p>
+            <p><span class="key">Sub Region</span>: ${
+              country.subregion ? country.subregion : "None"
+            }</p>
             <p><span class="key">Capital</span>: ${country.capital}</p>
             <p><span class="key">Top Level Domain</span>: ${country.tld[0]}</p>
             <p><span class="key">Currencies</span>: ${this.getNativeName(

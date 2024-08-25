@@ -116,6 +116,11 @@ input {
   background-color: var(--card-bg-color);
   color: var(--text-main-color);
 }
+@media (max-width: 768px) {
+  .search-input {
+    width: 200px;
+  }
+}
 .search-icon {
   position: absolute;
   left: 10px;
@@ -141,6 +146,11 @@ option {
   padding-left: 15px;
   background-color: var(--card-bg-color);
   color: var(--text-main-color);
+}
+@media (max-width: 768px) {
+  #filter {
+    width: 150px;
+  }
 }
 #filter:focus {
   outline: none;

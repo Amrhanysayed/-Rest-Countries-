@@ -1,8 +1,9 @@
 import View from "./view.js";
 import * as Model from "./model.js";
 
-async function showAll() {
-  const allCountries = await Model.getAll();
+async function showAll(filter = "", search = "") {
+  const allCountries = await Model.getAll(filter, search);
+  console.log(allCountries);
   View.renderAllCountries(allCountries);
 }
 
@@ -17,6 +18,8 @@ async function showCountry() {
 
 function init() {
   View.handlers(showCountry);
+  View.renderFilteredValue(showAll);
+  View.renderSearchedValue(showAll);
 }
 
 init();
