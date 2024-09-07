@@ -17,7 +17,7 @@ class View {
       const countryRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
       const val = this.#searchArea.value;
 
-      if (countryRegex.test(val)) callback("", val);
+      if (countryRegex.test(val)) callback(this.#filterArea.value, val);
       else if (!val) callback();
       else {
         this.#searchArea.value = "";

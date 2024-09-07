@@ -24,6 +24,13 @@ export function getAll(filter, search) {
     return data.filter(
       (el) => el.name.common !== "Israel" && el.continents[0] === filter
     );
+  } else if (filter && search) {
+    return data.filter(
+      (el) =>
+        el.name.common !== "Israel" &&
+        el.continents[0] === filter &&
+        el.name.common.toLowerCase().startsWith(search.toLowerCase())
+    );
   } else {
     return data.filter(
       (el) =>
