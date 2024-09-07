@@ -57,6 +57,7 @@ class View {
   backHandler() {
     document.querySelector(".back-container").addEventListener("click", (e) => {
       document.location.hash = "";
+      this.#resultElement.innerHTML = "";
       this.#mainElement.classList.toggle("hidden");
       this.#resultElement.classList.toggle("hidden");
     });

@@ -33,7 +33,10 @@ export function getAll(filter, search) {
   }
 }
 
-export function getCountry(ccn3) {
-  return state.countries.find((el) => el.ccn3 == ccn3);
-  // return await getJSON(`https://restcountries.com/v3.1/alpha/${ccn3}`);
+export function getCountry(code) {
+  if (!Number.isNaN(+code)) {
+    return state.countries.find((el) => el.ccn3 == code);
+  }
+  return state.countries.find((el) => el.cca3 == code);
+  // return await getJSON(`https://restcountries.com/v3.1/alpha/${code}`);
 }
