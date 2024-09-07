@@ -7,9 +7,9 @@ function showAll(filter = "", search = "") {
   View.renderAllCountries(allCountries);
 }
 
-function showCountry(filter) {
+function showCountry(filter, search) {
   const hash = document.location.hash.slice(1);
-  if (!hash) return showAll(filter);
+  if (!hash) return showAll(filter, search);
 
   const country = Model.getCountry(hash);
   View.renderResult(country);

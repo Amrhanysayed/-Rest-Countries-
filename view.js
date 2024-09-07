@@ -8,6 +8,7 @@ class View {
 
   #loaded = false;
   #filterValue = "All";
+  #searchValue = "";
 
   renderSearchedValue(callback) {
     this.#searchForm.addEventListener("submit", (e) => {
@@ -48,6 +49,8 @@ class View {
 
   renderResult(country) {
     this.#filterValue = this.#filterArea.value;
+    this.#searchValue = this.#searchArea.value;
+
     this.#mainElement.classList.add("hidden");
     this.#resultElement.classList.remove("hidden");
 
@@ -152,7 +155,7 @@ class View {
 
   handlers(callbackLoad, callbackInit) {
     window.addEventListener("hashchange", () => {
-      callbackLoad(this.#filterValue);
+      callbackLoad(this.#filterValue, this.#searchValue);
     });
 
     window.addEventListener("load", async () => {

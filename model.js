@@ -18,7 +18,7 @@ async function getJSON(url) {
 export function getAll(filter, search) {
   const data = state.countries;
 
-  if (!filter && !search) {
+  if ((!filter || filter === "All") && !search) {
     return data.filter((el) => el.name.common !== "Israel");
   } else if (filter && !search) {
     return data.filter(
