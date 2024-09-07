@@ -211,22 +211,6 @@ p {
 .card-title h3 {
   color: var(--text-main-color);
 }
-/* .card-title h3{
-    padding-left: 10px ;
-} */
-
-/* <div class="card">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1280px-Flag_of_Germany.svg.png" alt="">
-                        <div class="card-text">
-                            <div class="card-title">
-                                <h3>Afghanistan</h3>
-                            </div>
-                            <p><span>Population:</span> 27,000,000</p>
-                            <p><span>Region:</span> Asia</p>
-                            <p><span>Capital:</span> Kabul</p>
-                        </div>
-                    </div>
- */
 
 /* class for js  */
 
