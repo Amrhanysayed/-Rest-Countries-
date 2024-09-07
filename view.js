@@ -18,7 +18,7 @@ class View {
       const val = this.#searchArea.value;
 
       if (countryRegex.test(val)) callback(this.#filterArea.value, val);
-      else if (!val) callback();
+      else if (!val) callback(this.#filterArea.value);
       else {
         this.#searchArea.value = "";
         this.#searchArea.placeholder = "Invalid Country Name";
