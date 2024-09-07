@@ -7,6 +7,7 @@ class View {
   #mainElement = document.querySelector("main");
 
   #loaded = false;
+  #filterValue = "All";
 
   renderSearchedValue(callback) {
     this.#searchForm.addEventListener("submit", (e) => {
@@ -46,6 +47,7 @@ class View {
   }
 
   renderResult(country) {
+    this.#filterValue = this.#filterArea.value;
     this.#mainElement.classList.add("hidden");
     this.#resultElement.classList.remove("hidden");
 
@@ -57,6 +59,7 @@ class View {
 
   backHandler() {
     document.querySelector(".back-container").addEventListener("click", (e) => {
+      this.#filterArea.value = this.#filterValue;
       document.location.hash = "";
       this.#resultElement.innerHTML = "";
       this.#mainElement.classList.toggle("hidden");
@@ -148,7 +151,10 @@ class View {
   }
 
   handlers(callbackLoad, callbackInit) {
-    window.addEventListener("hashchange", callbackLoad);
+    window.addEventListener("hashchange", () => {
+      callbackLoad(this.#filterValue);
+    });
+
     window.addEventListener("load", async () => {
       if (!this.#loaded) {
         await callbackInit();
