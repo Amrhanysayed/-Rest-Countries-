@@ -5,7 +5,7 @@ const backButton = document.querySelector(".back-container");
 const main = document.querySelector("main");
 const searchResult = document.querySelector(".search-result");
 const cardsContainer = document.querySelector(".crads-box");
-///<i class='bx bx-sun'></i>
+
 const root = document.querySelector(":root");
 
 let flag = false;

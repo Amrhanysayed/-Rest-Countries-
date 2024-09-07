@@ -1,10 +1,14 @@
 class View {
-  parentElement = document.querySelector(".crads-box");
+  #parentElement = document.querySelector(".crads-box");
+  #loaded = false;
 
   renderSearchedValue(callback) {
     const searchCountry = document.querySelector(".search-form");
-    document.querySelector(".search-input").addEventListener("keyup", (e) => {
+    searchCountry.addEventListener("submit", (e) => {
       e.preventDefault();
+    });
+
+    document.querySelector(".search-input").addEventListener("keyup", (e) => {
       const countryRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
       const val = document.querySelector(".search-input").value;
       console.log(val);
@@ -17,36 +21,44 @@ class View {
       }
     });
   }
+
   renderFilteredValue(callback) {
     const selectedFilter = document.getElementById("filter");
     selectedFilter.addEventListener("change", (e) => {
       callback(e.target.value);
     });
   }
+
   renderAllCountries(countries) {
     document.querySelector(".search-result").classList.add("hidden");
     document.querySelector("main").classList.remove("hidden");
-    this.parentElement.innerHTML = "";
+    this.#parentElement.innerHTML = "";
+    let markup = "";
     Array.from(countries).forEach((country) => {
-      this.parentElement.innerHTML += this.generateAllMarkup(country);
+      markup += this.generateAllMarkup(country);
     });
+
+    this.#parentElement.insertAdjacentHTML("beforeend", markup);
   }
+
   renderResult(country) {
     document.querySelector("main").classList.add("hidden");
 
     const resultContainer = document.querySelector(".search-result");
     resultContainer.classList.remove("hidden");
+    const markup = this.generateResultMarkup(country);
     resultContainer.innerHTML = "";
-    resultContainer.innerHTML += this.generateResultMarkup(country);
+    resultContainer.insertAdjacentHTML("beforeend", markup);
   }
+
   backHandler() {
     document.querySelector(".back-container").addEventListener("click", (e) => {
-      e.preventDefault();
       document.location.hash = "";
       main.classList.toggle("hidden");
       searchResult.classList.toggle("hidden");
     });
   }
+
   generateAllMarkup(country) {
     return `
     <a href="#${country.ccn3}">
@@ -126,9 +138,15 @@ class View {
     );
     return html;
   }
-  handlers(event) {
-    window.addEventListener("hashchange", event);
-    window.addEventListener("load", event);
+  handlers(callbackLoad, callbackInit) {
+    window.addEventListener("hashchange", callbackLoad);
+    window.addEventListener("load", async () => {
+      if (!this.#loaded) {
+        await callbackInit();
+        this.#loaded = true;
+      }
+      callbackLoad();
+    });
   }
 }
 

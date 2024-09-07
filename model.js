@@ -1,3 +1,9 @@
+export const state = {};
+
+export async function stateInit() {
+  state.countries = await getJSON(`https://restcountries.com/v3.1/all`);
+}
+
 async function getJSON(url) {
   try {
     const response = await fetch(url);
@@ -9,17 +15,16 @@ async function getJSON(url) {
     throw err;
   }
 }
-export async function getAll(filter, search) {
-  const data = await getJSON(`https://restcountries.com/v3.1/all`);
-  console.log(data);
-  if (!filter && !search)
+export function getAll(filter, search) {
+  const data = state.countries;
+
+  if (!filter && !search) {
     return data.filter((el) => el.name.common !== "Israel");
-  //
-  else if (filter && !search)
+  } else if (filter && !search) {
     return data.filter(
       (el) => el.name.common !== "Israel" && el.continents[0] === filter
     );
-  else {
+  } else {
     return data.filter(
       (el) =>
         el.name.common !== "Israel" &&
@@ -28,7 +33,7 @@ export async function getAll(filter, search) {
   }
 }
 
-export async function getCountry(ccn3) {
-  const country = await getJSON(`https://restcountries.com/v3.1/alpha/${ccn3}`);
-  return country[0];
+export function getCountry(ccn3) {
+  return state.countries.find((el) => el.ccn3 == ccn3);
+  // return await getJSON(`https://restcountries.com/v3.1/alpha/${ccn3}`);
 }
