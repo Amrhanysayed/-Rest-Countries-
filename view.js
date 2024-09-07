@@ -11,7 +11,6 @@ class View {
     document.querySelector(".search-input").addEventListener("keyup", (e) => {
       const countryRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
       const val = document.querySelector(".search-input").value;
-      console.log(val);
       if (countryRegex.test(val)) callback("", val);
       else if (!val) callback();
       else {

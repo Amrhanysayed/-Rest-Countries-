@@ -19,7 +19,6 @@ dark_btn.addEventListener("click", function () {
     root.style.setProperty("--main--bg-color", "#0000");
     root.style.setProperty("--card-bg-color", "#333");
     flag = true;
-    console.log("from black to light");
   } else {
     dark_btn.innerHTML = "";
     dark_btn.innerHTML = x;
