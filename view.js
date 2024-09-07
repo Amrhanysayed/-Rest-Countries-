@@ -34,7 +34,7 @@ class View {
     this.#parentElement.innerHTML = "";
     let markup = "";
     Array.from(countries).forEach((country) => {
-      markup += this.generateAllMarkup(country);
+      markup += this.#generateAllMarkup(country);
     });
 
     this.#parentElement.insertAdjacentHTML("beforeend", markup);
@@ -45,7 +45,7 @@ class View {
 
     const resultContainer = document.querySelector(".search-result");
     resultContainer.classList.remove("hidden");
-    const markup = this.generateResultMarkup(country);
+    const markup = this.#generateResultMarkup(country);
     resultContainer.innerHTML = "";
     resultContainer.insertAdjacentHTML("beforeend", markup);
   }
@@ -58,7 +58,7 @@ class View {
     });
   }
 
-  generateAllMarkup(country) {
+  #generateAllMarkup(country) {
     return `
     <a href="#${country.ccn3}">
     <div class="card">
@@ -79,13 +79,15 @@ class View {
           </a>
             `;
   }
-  getNativeName(nativeName, cur = "") {
+
+  #getNativeName(nativeName, cur = "") {
     const [_, obj] = Object.entries(nativeName)[0];
     if (cur === "cur") return obj.name;
     if (cur === "lang") return obj.split(",");
     return obj.common;
   }
-  generateResultMarkup(country) {
+
+  #generateResultMarkup(country) {
     return `
         <div class="back-container">
         <button>Back</button>
@@ -101,7 +103,7 @@ class View {
         <div class="details-container">
           <h1>${country.name.common}</h1>
           <div class="country-details--grid">
-            <p><span class="key">Native Name</span>: ${this.getNativeName(
+            <p><span class="key">Native Name</span>: ${this.#getNativeName(
               country.name.nativeName
             )}</p>
             <p><span class="key">Population</span>: ${country.population}</p>
@@ -111,24 +113,25 @@ class View {
             }</p>
             <p><span class="key">Capital</span>: ${country.capital}</p>
             <p><span class="key">Top Level Domain</span>: ${country.tld[0]}</p>
-            <p><span class="key">Currencies</span>: ${this.getNativeName(
+            <p><span class="key">Currencies</span>: ${this.#getNativeName(
               country.currencies,
               "cur"
             )}</p>
-            <p><span class="key">Languages</span>: ${this.getNativeName(
+            <p><span class="key">Languages</span>: ${this.#getNativeName(
               country.languages,
               "lang"
             )}</p>
           </div>
           <div class="country-borders">
             <div class="key">Border Countries:</div>
-            ${this.generateBorders(country.borders)}
+            ${this.#generateBorders(country.borders)}
           </div>
         </div>
       </div>
     `;
   }
-  generateBorders(borders) {
+
+  #generateBorders(borders) {
     if (!borders) return `<div class="boxing">NONE</div>`;
     let html = ``;
     borders.forEach(
@@ -137,6 +140,7 @@ class View {
     );
     return html;
   }
+
   handlers(callbackLoad, callbackInit) {
     window.addEventListener("hashchange", callbackLoad);
     window.addEventListener("load", async () => {
