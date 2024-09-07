@@ -1,4 +1,5 @@
 class View {
+  // Setting some useful/needed HTML elements
   #parentElement = document.querySelector(".crads-box");
   #searchForm = document.querySelector(".search-form");
   #searchArea = document.querySelector(".search-input");
@@ -6,21 +7,27 @@ class View {
   #resultElement = document.querySelector(".search-result");
   #mainElement = document.querySelector("main");
 
+  // Storing values to be restored upon pages navigation
   #loaded = false;
   #filterValue = "All";
   #searchValue = "";
 
+  /**
+   * Keeps scraping the search box and renders countries starting with the entered value
+   * @param {function} callback
+   */
   renderSearchedValue(callback) {
     this.#searchForm.addEventListener("submit", (e) => {
       e.preventDefault();
     });
 
     this.#searchArea.addEventListener("keyup", (e) => {
-      const countryRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
-      const val = this.#searchArea.value;
+      const countryRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/; // Regex to check for valid input (only chars)
+      const val = this.#searchArea.value; // Stores the search value
 
-      if (countryRegex.test(val)) callback(this.#filterArea.value, val);
-      else if (!val) callback(this.#filterArea.value);
+      if (countryRegex.test(val))
+        callback(this.#filterArea.value, val); // If valid input
+      else if (!val) callback(this.#filterArea.value); // else, renders all
       else {
         this.#searchArea.value = "";
         this.#searchArea.placeholder = "Invalid Country Name";
@@ -28,6 +35,10 @@ class View {
     });
   }
 
+  /**
+   * Renders countries with the filter value properties (continent)
+   * @param {function} callback
+   */
   renderFilteredValue(callback) {
     this.#filterArea.addEventListener("change", (e) => {
       if (e.target.value === "All") return callback();
@@ -35,6 +46,10 @@ class View {
     });
   }
 
+  /**
+   * Renders all countries objects given
+   * @param {Object[]} countries
+   */
   renderAllCountries(countries) {
     this.#resultElement.classList.add("hidden");
     this.#mainElement.classList.remove("hidden");
@@ -47,6 +62,10 @@ class View {
     this.#parentElement.insertAdjacentHTML("beforeend", markup);
   }
 
+  /**
+   *
+   * @param {object} country
+   */
   renderResult(country) {
     this.#filterValue = this.#filterArea.value;
     this.#searchValue = this.#searchArea.value;
@@ -60,6 +79,10 @@ class View {
     this.#resultElement.insertAdjacentHTML("beforeend", markup);
   }
 
+  /**
+   * Resets the hash value upon clicking on the back button
+   * Restores the main page with the previous search & filter values
+   */
   backHandler() {
     document.querySelector(".back-container").addEventListener("click", (e) => {
       this.#filterArea.value = this.#filterValue;
@@ -70,6 +93,11 @@ class View {
     });
   }
 
+  /**
+   *
+   * @param {object} country
+   * @returns {markup}
+   */
   #generateAllMarkup(country) {
     return `
     <a href="#${country.ccn3}">
@@ -92,6 +120,12 @@ class View {
             `;
   }
 
+  /**
+   * Returns the country native name or its currency(ies)
+   * @param {string} nativeName
+   * @param {string | Array<string>} cur
+   * @returns {Array<string> | string}
+   */
   #getNativeName(nativeName, cur = "") {
     const [_, obj] = Object.entries(nativeName)[0];
     if (cur === "cur") return obj.name;
@@ -99,6 +133,11 @@ class View {
     return obj.common;
   }
 
+  /**
+   * Generates country result markup
+   * @param {object} country
+   * @returns {markup}
+   */
   #generateResultMarkup(country) {
     return `
         <div class="back-container">
@@ -143,6 +182,11 @@ class View {
     `;
   }
 
+  /**
+   * Generates borders boxes markup
+   * @param {Array<object> | null} borders
+   * @returns {markup}
+   */
   #generateBorders(borders) {
     if (!borders) return `<div class="boxing">NONE</div>`;
     let html = ``;
@@ -153,6 +197,11 @@ class View {
     return html;
   }
 
+  /**
+   * Sets main event handlers
+   * @param {function} callbackLoad
+   * @param {function} callbackInit
+   */
   handlers(callbackLoad, callbackInit) {
     window.addEventListener("hashchange", () => {
       callbackLoad(this.#filterValue, this.#searchValue);

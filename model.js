@@ -1,9 +1,17 @@
 export const state = {};
 
+/**
+ * Initial function to store all countries in the state object
+ */
 export async function stateInit() {
   state.countries = await getJSON(`https://restcountries.com/v3.1/all`);
 }
 
+/**
+ * Helper fetching function
+ * @param {URL} url
+ * @returns {Promise<object>}
+ */
 async function getJSON(url) {
   try {
     const response = await fetch(url);
@@ -15,6 +23,13 @@ async function getJSON(url) {
     throw err;
   }
 }
+
+/**
+ * Returns all countries with the query properties if exist
+ * @param {string | null} filter
+ * @param {string | null} search
+ * @returns {Array<object>}
+ */
 export function getAll(filter, search) {
   const data = state.countries;
 
@@ -40,6 +55,11 @@ export function getAll(filter, search) {
   }
 }
 
+/**
+ *
+ * @param {number} code
+ * @returns {object}
+ */
 export function getCountry(code) {
   if (!Number.isNaN(+code)) {
     return state.countries.find((el) => el.ccn3 == code);
