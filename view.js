@@ -28,6 +28,7 @@ class View {
 
   renderFilteredValue(callback) {
     this.#filterArea.addEventListener("change", (e) => {
+      if (e.target.value === "All") return callback();
       callback(e.target.value);
     });
   }
