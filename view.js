@@ -1,36 +1,40 @@
 class View {
   #parentElement = document.querySelector(".crads-box");
+  #searchForm = document.querySelector(".search-form");
+  #searchArea = document.querySelector(".search-input");
+  #filterArea = document.getElementById("filter");
+  #resultElement = document.querySelector(".search-result");
+  #mainElement = document.querySelector("main");
+
   #loaded = false;
 
   renderSearchedValue(callback) {
-    const searchCountry = document.querySelector(".search-form");
-    searchCountry.addEventListener("submit", (e) => {
+    this.#searchForm.addEventListener("submit", (e) => {
       e.preventDefault();
     });
 
-    document.querySelector(".search-input").addEventListener("keyup", (e) => {
+    this.#searchArea.addEventListener("keyup", (e) => {
       const countryRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
-      const val = document.querySelector(".search-input").value;
+      const val = this.#searchArea.value;
+
       if (countryRegex.test(val)) callback("", val);
       else if (!val) callback();
       else {
-        document.querySelector(".search-input").value = "";
-        document.querySelector(".search-input").placeholder =
-          "Invalid Country Name";
+        this.#searchArea.value = "";
+        this.#searchArea.placeholder = "Invalid Country Name";
       }
     });
   }
 
   renderFilteredValue(callback) {
-    const selectedFilter = document.getElementById("filter");
-    selectedFilter.addEventListener("change", (e) => {
+    this.#filterArea.addEventListener("change", (e) => {
       callback(e.target.value);
     });
   }
 
   renderAllCountries(countries) {
-    document.querySelector(".search-result").classList.add("hidden");
-    document.querySelector("main").classList.remove("hidden");
+    this.#resultElement.classList.add("hidden");
+    this.#mainElement.classList.remove("hidden");
     this.#parentElement.innerHTML = "";
     let markup = "";
     Array.from(countries).forEach((country) => {
@@ -41,20 +45,20 @@ class View {
   }
 
   renderResult(country) {
-    document.querySelector("main").classList.add("hidden");
+    this.#mainElement.classList.add("hidden");
+    this.#resultElement.classList.remove("hidden");
 
-    const resultContainer = document.querySelector(".search-result");
-    resultContainer.classList.remove("hidden");
     const markup = this.#generateResultMarkup(country);
-    resultContainer.innerHTML = "";
-    resultContainer.insertAdjacentHTML("beforeend", markup);
+
+    this.#resultElement.innerHTML = "";
+    this.#resultElement.insertAdjacentHTML("beforeend", markup);
   }
 
   backHandler() {
     document.querySelector(".back-container").addEventListener("click", (e) => {
       document.location.hash = "";
-      main.classList.toggle("hidden");
-      searchResult.classList.toggle("hidden");
+      this.#mainElement.classList.toggle("hidden");
+      this.#resultElement.classList.toggle("hidden");
     });
   }
 
